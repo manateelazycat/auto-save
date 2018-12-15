@@ -1,7 +1,7 @@
 # What is auto-save ?
 * Automatically save file content
 * No annoying temporary files need to be cleaned
-* No need to manually save manually, protect your fingers.
+* No need to save manually, protect your fingers.
 
 ## Installation
 Clone or download this repository (path of the folder is the `<path-to-auto-save>` used below).
