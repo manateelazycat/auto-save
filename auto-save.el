@@ -142,10 +142,7 @@ avoid delete current indent space when you programming."
                  (or (not (boundp 'company-candidates))
                      (not company-candidates)))
             (push (buffer-name) autosave-buffer-list)
-            (if auto-save-silent
-                (with-temp-message
-                    (with-current-buffer " *Minibuf-0*" (buffer-string))
-                  (basic-save-buffer))
+            (let ((inhibit-message auto-save-silent))
               (basic-save-buffer))
             ))
         ;; Tell user when auto save files.
