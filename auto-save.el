@@ -142,7 +142,12 @@ avoid delete current indent space when you programming."
                  (or (not (boundp 'company-candidates))
                      (not company-candidates)))
             (push (buffer-name) autosave-buffer-list)
-            (let ((inhibit-message auto-save-silent))
+            (if auto-save-silent
+                ;; `inhibit-message' can shut up Emacs, but we want
+                ;; it doesn't clean up echo area during saving
+                (with-temp-message ""
+                  (let ((inhibit-message t))
+                    (basic-save-buffer)))
               (basic-save-buffer))
             ))
         ;; Tell user when auto save files.
