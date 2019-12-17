@@ -44,18 +44,14 @@
 
 ;;; Installation:
 ;;
-;; Put auto-save.el to your load-path.
-;; The load-path is usually ~/elisp/.
-;; It's set in your ~/.emacs like this:
-;; (add-to-list 'load-path (expand-file-name "~/elisp"))
-;;
-;; And the following to your ~/.emacs startup file.
-;;
-;; (require 'init-auto-save)
+;; Clone or download this repository (path of the folder is the `<path-to-auto-save>` used below).
+;; In your `~/.emacs`, add the following three lines:
+;; (add-to-list 'load-path "<path-to-auto-save>") ; add auto-save to your load-path
+;; (require 'auto-save)
 ;; (auto-save-enable)
 ;;
-;; Set `auto-save-silent' with non-nil if want emacs save files slient:
-;; (setq auto-save-silent t)
+;; (setq auto-save-silent t)   ; quietly save
+;; (setq auto-save-delete-trailing-whitespace t)  ; automatically delete spaces at the end of the line when saving
 ;;
 ;; No need more.
 
