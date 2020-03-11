@@ -19,7 +19,7 @@ In your `~/.emacs`, add the following three lines:
 ;;; disable auto save mode when current filetype is an gpg file.
 (setq auto-save-disable-predicates
       '((lambda ()
-	  (string-suffix-p
-	   "gpg"
-	   (file-name-extension (buffer-name)) t))))
+      (string-suffix-p
+      "gpg"
+      (file-name-extension (buffer-name)) t))))
 ```

@@ -139,10 +139,10 @@ avoid delete current indent space when you programming."
                  ;; Company is not active?
                  (or (not (boundp 'company-candidates))
                      (not company-candidates))
-		 ;; tell auto-save don't save
-		 (not (seq-some (lambda (predicate)
-				     (funcall predicate))
-				   auto-save-disable-predicates)))
+                 ;; tell auto-save don't save
+                 (not (seq-some (lambda (predicate)
+                                  (funcall predicate))
+                                auto-save-disable-predicates)))
             (push (buffer-name) autosave-buffer-list)
             (if auto-save-silent
                 ;; `inhibit-message' can shut up Emacs, but we want
