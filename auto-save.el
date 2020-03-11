@@ -115,6 +115,9 @@ avoid delete current indent space when you programming."
   :type 'boolean
   :group 'auto-save)
 
+(defvar auto-save-disable-predicates
+  nil "disable auto save in these case.")
+
 ;; Emacs' default auto-save is stupid to generate #foo# files!
 (setq auto-save-default nil)
 
@@ -135,7 +138,11 @@ avoid delete current indent space when you programming."
                      (not yas--active-snippets))
                  ;; Company is not active?
                  (or (not (boundp 'company-candidates))
-                     (not company-candidates)))
+                     (not company-candidates))
+                 ;; tell auto-save don't save
+                 (not (seq-some (lambda (predicate)
+                                  (funcall predicate))
+                                auto-save-disable-predicates)))
             (push (buffer-name) autosave-buffer-list)
             (if auto-save-silent
                 ;; `inhibit-message' can shut up Emacs, but we want
