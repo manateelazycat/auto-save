@@ -201,6 +201,7 @@ Cancel any previous timer."
   )
 
 (defun auto-save-disable ()
+  (interactive)
   (auto-save-cancel-timer)
   (remove-hook 'before-save-hook 'auto-save-delete-trailing-whitespace-except-current-line)
   (remove-hook 'before-save-hook 'font-lock-flush)
