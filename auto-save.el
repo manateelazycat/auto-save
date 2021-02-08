@@ -120,6 +120,7 @@ avoid delete current indent space when you programming."
 
 ;; Emacs' default auto-save is stupid to generate #foo# files!
 (setq auto-save-default nil)
+(setq create-lockfiles nil)
 
 (defun auto-save-buffers ()
   (interactive)
