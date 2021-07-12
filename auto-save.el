@@ -126,7 +126,7 @@ avoid delete current indent space when you programming."
   (interactive)
   (let ((autosave-buffer-list))
     (ignore-errors
-      (with-current-buffer (current-buffer)
+      (save-current-buffer
         (dolist (buf (buffer-list))
           (set-buffer buf)
           (when (and
