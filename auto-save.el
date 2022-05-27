@@ -140,6 +140,9 @@ avoid delete current indent space when you programming."
                  ;; Company is not active?
                  (or (not (boundp 'company-candidates))
                      (not company-candidates))
+                 ;; Corfu is not active?
+                 (or (not (boundp 'corfu--total))
+                     (zerop corfu--total))
                  ;; tell auto-save don't save
                  (not (seq-some (lambda (predicate)
                                   (funcall predicate))
