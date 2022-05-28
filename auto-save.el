@@ -119,6 +119,7 @@ avoid delete current indent space when you programming."
   nil "disable auto save in these case.")
 
 ;; Emacs' default auto-save is stupid to generate #foo# files!
+(setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq create-lockfiles nil)
 
