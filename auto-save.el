@@ -144,6 +144,9 @@ avoid delete current indent space when you programming."
                  ;; Corfu is not active?
                  (or (not (boundp 'corfu--total))
                      (zerop corfu--total))
+                 ;; Org-capture is not active?
+                 (not (eq (buffer-base-buffer (get-buffer (concat "CAPTURE-" (buffer-name))))
+                          buf))
                  ;; tell auto-save don't save
                  (not (seq-some (lambda (predicate)
                                   (funcall predicate))
