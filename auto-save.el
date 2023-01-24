@@ -157,9 +157,8 @@ avoid delete current indent space when you programming."
                 ;; it doesn't clean up echo area during saving
                 (with-temp-message ""
                   (let ((inhibit-message t))
-                    (basic-save-buffer)))
-              (basic-save-buffer))
-            ))
+                    (auto-save-save-buffer)))
+              (auto-save-save-buffer))))
         ;; Tell user when auto save files.
         (unless auto-save-silent
           (cond
@@ -169,8 +168,11 @@ avoid delete current indent space when you programming."
            ((> (length autosave-buffer-list) 1)
             (message "# Saved %d files: %s"
                      (length autosave-buffer-list)
-                     (mapconcat 'identity autosave-buffer-list ", ")))))
-        ))))
+                     (mapconcat 'identity autosave-buffer-list ", ")))))))))
+
+(defun auto-save-save-buffer ()
+  (let ((write-region-inhibit-fsync t))
+    (basic-save-buffer)))
 
 (defun auto-save-delete-trailing-whitespace-except-current-line ()
   (interactive)
