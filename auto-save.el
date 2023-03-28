@@ -132,7 +132,8 @@ avoid delete current indent space when you programming."
           (set-buffer buf)
           (when (and
                  ;; Buffer associate with a filename?
-                 (buffer-file-name)
+                 (or (buffer-file-name)
+                     (auto-save-is-nova-file))
                  ;; Buffer is modifiable?
                  (buffer-modified-p)
                  ;; Yassnippet is not active?
@@ -172,7 +173,9 @@ avoid delete current indent space when you programming."
 
 (defun auto-save-save-buffer ()
   (let ((write-region-inhibit-fsync t))
-    (basic-save-buffer)))
+    (if (auto-save-is-nova-file)
+        (nova-save-buffer)
+      (basic-save-buffer))))
 
 (defun auto-save-delete-trailing-whitespace-except-current-line ()
   (interactive)
@@ -206,14 +209,16 @@ Cancel any previous timer."
 (defun auto-save-enable ()
   (interactive)
   (auto-save-set-timer)
-  (add-hook 'before-save-hook 'auto-save-delete-trailing-whitespace-except-current-line)
-  )
+  (add-hook 'before-save-hook 'auto-save-delete-trailing-whitespace-except-current-line))
 
 (defun auto-save-disable ()
   (interactive)
   (auto-save-cancel-timer)
-  (remove-hook 'before-save-hook 'auto-save-delete-trailing-whitespace-except-current-line)
-  )
+  (remove-hook 'before-save-hook 'auto-save-delete-trailing-whitespace-except-current-line))
+
+(defun auto-save-is-nova-file ()
+  (and (boundp 'nova-is-remote-file)
+       nova-is-remote-file))
 
 (provide 'auto-save)
 
