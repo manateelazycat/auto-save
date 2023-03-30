@@ -133,7 +133,7 @@ avoid delete current indent space when you programming."
           (when (and
                  ;; Buffer associate with a filename?
                  (or (buffer-file-name)
-                     (auto-save-is-nova-file))
+                     (auto-save-is-remote-file))
                  ;; Buffer is modifiable?
                  (buffer-modified-p)
                  ;; Yassnippet is not active?
@@ -173,8 +173,8 @@ avoid delete current indent space when you programming."
 
 (defun auto-save-save-buffer ()
   (let ((write-region-inhibit-fsync t))
-    (if (auto-save-is-nova-file)
-        (nova-save-buffer)
+    (if (auto-save-is-remote-file)
+        (lsp-bridge-remote-save-buffer)
       (basic-save-buffer))))
 
 (defun auto-save-delete-trailing-whitespace-except-current-line ()
@@ -216,9 +216,9 @@ Cancel any previous timer."
   (auto-save-cancel-timer)
   (remove-hook 'before-save-hook 'auto-save-delete-trailing-whitespace-except-current-line))
 
-(defun auto-save-is-nova-file ()
-  (and (boundp 'nova-is-remote-file)
-       nova-is-remote-file))
+(defun auto-save-is-remote-file ()
+  (and (boundp 'lsp-bridge-remote-file-flag)
+       lsp-bridge-remote-file-flag))
 
 (provide 'auto-save)
 
