@@ -157,7 +157,12 @@ avoid delete current indent space when you programming."
                 ;; `inhibit-message' can shut up Emacs, but we want
                 ;; it doesn't clean up echo area during saving
                 (with-temp-message ""
-                  (let ((inhibit-message t))
+                  (let (;; `inhibit-message' make save message don't show in minibuffer
+                        (inhibit-message t)
+                        ;; `inhibit-redisplay' prevent intermediate messages from flashing to the user
+                        (inhibit-redisplay t)
+                        ;; `message-log-max' make save message don't flash in `*Messages*' buffer
+                        (message-log-max nil))
                     (auto-save-save-buffer)))
               (auto-save-save-buffer))))
         ;; Tell user when auto save files.
