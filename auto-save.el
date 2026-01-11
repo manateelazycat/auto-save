@@ -1,4 +1,4 @@
-;;; auto-save.el --- Auto save files when idle
+;;; auto-save.el --- Auto save files when idle -*- lexical-binding: t -*-
 
 ;; Filename: auto-save.el
 ;; Description: Auto save files when idle
